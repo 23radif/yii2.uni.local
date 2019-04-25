@@ -16,6 +16,8 @@ use Yii;
  */
 class Users extends \yii\db\ActiveRecord
 {
+    const SCENARIO_AUTH = 'auth';
+
     /**
      * {@inheritdoc}
      */
@@ -50,5 +52,15 @@ class Users extends \yii\db\ActiveRecord
             'accessToken' => 'Access Token',
             'regDate' => 'Reg Date',
         ];
+    }
+
+    public function fields()
+    {
+        if($this->scenario == static::SCENARIO_AUTH){
+            return ['id',
+                'username',
+                'password'];
+        }
+        return parent::fields();
     }
 }

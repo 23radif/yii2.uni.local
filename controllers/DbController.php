@@ -5,7 +5,6 @@ namespace app\controllers;
 
 
 use app\models\tables\Task;
-use app\models\tables\Users;
 use yii\web\Controller;
 
 class DbController extends Controller
@@ -24,7 +23,7 @@ class DbController extends Controller
         ")->bindValue(':id', 2)
           ->execute();
 
-//        exit;
+        exit;
     }
 
 
@@ -40,9 +39,9 @@ class DbController extends Controller
 
         $model->save();*/
 
-        $model = Task::findOne(3);
+        /*$model = Task::findOne(3);
         $model->name = "Постичь непостижимое";
-        $model->save();
+        $model->save();*/
 
         /*$model = Task::findOne(['name' => 'Task 5']);*/
         /*$models = Task::findAll([1, 2, 3]);*/
@@ -64,12 +63,8 @@ class DbController extends Controller
         );  //SELECT * FROM task*/
 
        /** @var Task $model */
-//        $model = Task::findOne(1);
-//        var_dump($model->status);
-//        exit;
-
-        $model = Users::findOne(1);
-        var_dump($model->status);
+        $model = Task::findOne(1);
+       var_dump($model->status);
         exit;
     }
 }
