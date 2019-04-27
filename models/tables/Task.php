@@ -16,6 +16,7 @@ use Yii;
  * @property int $status_id
  *
  * @property Test $status
+ * @property Users $responsible
  */
 class Task extends \yii\db\ActiveRecord
 {
@@ -59,5 +60,10 @@ class Task extends \yii\db\ActiveRecord
     public function getStatus()
     {
         return $this->hasOne(Test::class, ['id' => 'status_id']);
+    }
+
+    public function getResponsible()
+    {
+        return $this->hasOne(Users::class, ['id' => 'responsible_id']);
     }
 }

@@ -32,10 +32,10 @@ class Users extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['username', 'password', 'authKey', 'accessToken'], 'required'],
-            [['regDate'], 'safe'],
-            [['username'], 'string', 'max' => 25],
-            [['password', 'authKey', 'accessToken'], 'string', 'max' => 255],
+            [['login'], 'string', 'max' => 50],
+            [['password'], 'string', 'max' => 20],
+            [['email'], 'string', 'max' => 255],
+            //[['regDate'], 'safe'],
         ];
     }
 
@@ -46,21 +46,29 @@ class Users extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'username' => 'Username',
+            'login' => 'Login',
             'password' => 'Password',
-            'authKey' => 'Auth Key',
-            'accessToken' => 'Access Token',
+            'email' => 'Email',
             'regDate' => 'Reg Date',
         ];
     }
 
     public function fields()
     {
-        if($this->scenario == static::SCENARIO_AUTH){
-            return ['id',
-                'username',
+        if ($this->scenario == static::SCENARIO_AUTH) {
+            return [
+                'id',
+                'username' => 'login',
                 'password'];
         }
         return parent::fields();
+    }
+
+    public static function getUsersList()
+    {
+        return static::find()
+            ->select(['login'])
+            ->indexBy('id')
+            ->column();
     }
 }
