@@ -46,6 +46,9 @@ class TasksFilter extends Task
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [ //пагинация 
+                'pageSize' => 4,
+            ],
         ]);
 
         $this->load($params);
