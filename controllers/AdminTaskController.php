@@ -39,9 +39,16 @@ class AdminTaskController extends Controller
         $searchModel = new TasksFilter();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $creatorId = Task::getCreatorId();
+        $responsibleId = Task::getResponsibleId();
+        $statusId = Task::getStatusId();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'creatorId' => $creatorId,
+            'responsibleId' => $responsibleId,
+            'statusId' => $statusId,
         ]);
     }
 
@@ -53,8 +60,15 @@ class AdminTaskController extends Controller
      */
     public function actionView($id)
     {
+        $creatorId = Task::getCreatorId();
+        $responsibleId = Task::getResponsibleId();
+        $statusId = Task::getStatusId();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'creatorId' => $creatorId,
+            'responsibleId' => $responsibleId,
+            'statusId' => $statusId,
         ]);
     }
 

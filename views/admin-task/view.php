@@ -39,38 +39,20 @@ if (!$hide) { //убираем дублирование хлебных крош�
             //'creator_id', ниже возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
             [
                 'label' => 'creator_id (создатель)',
-                'value' => function ($model) {
-                    return $model->creator_id . ' (' .
-                        $user = Users::find()
-                                ->where(['id' => $model->creator_id])
-                                ->one()
-                                ->login . ')';
-                },
+                'value' => $creatorId,
                 'attribute' => 'creator_id'
             ],
             //'responsible_id', ниже возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
             [
                 'label' => 'responsible_id (ответственный)',
-                'value' => function ($model) {
-                    return $model->responsible_id . ' (' .
-                        $user = Users::find()
-                                ->where(['id' => $model->responsible_id])
-                                ->one()
-                                ->login . ')';
-                },
+                'value' => $responsibleId,
                 'attribute' => 'responsible_id'
             ],
             'deadline',
 //            'status_id', ниже возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
             [
                 'label' => 'status_id (статус)',
-                'value' => function ($model) {
-                    return $model->status_id . ' (' .
-                        $user = Users::find()
-                                ->where(['id' => $model->status_id])
-                                ->one()
-                                ->login . ')';
-                },
+                'value' => $statusId,
                 'attribute' => 'status_id'
             ],
         ],

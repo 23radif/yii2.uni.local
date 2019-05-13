@@ -19,22 +19,14 @@ use \app\models\tables\Users;
     <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
 
 <!--    Выпадающий список пользователей-->
-    <?= $form->field($model, 'creator_id')->dropDownList(
-        $usersList
-    ); ?>
+    <?= $form->field($model, 'creator_id')->dropDownList($usersList); ?>
 
 <!--    Выпадающий список пользователей-->
-    <?= $form->field($model, 'responsible_id')->dropDownList(
-        $usersList
-    ); ?>
+    <?= $form->field($model, 'responsible_id')->dropDownList($usersList); ?>
 
     <?= $form->field($model, 'deadline')->textInput() ?>
 
-<!--    В качестве статуса выставляются первые 3 пользователя-->
-<!--    Не знаю как сделать лимит в выводе через $userList без условий и логики, пока оставил как было-->
-    <?= $form->field($model, 'status_id')->dropDownList(
-        ArrayHelper::map(Users::find()->limit(3)->all(), 'id', 'login')
-    ); ?>
+    <?= $form->field($model, 'status_id')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

@@ -4,6 +4,7 @@ use app\models\tables\Users;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ListView;
+use \app\models\tables\Task;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\filters\TasksFilter */
@@ -31,41 +32,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'name',
             'description',
-            //'creator_id', ниже возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
+            //Task::getCreatorId(), возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
             [
                 'label' => 'creator_id (создатель)',
-                'value' => function ($model) {
-                    return $model->creator_id . ' (' .
-                        $user = Users::find()
-                                ->where(['id' => $model->creator_id])
-                                ->one()
-                                ->login . ')';
-                },
+                'value' => Task::getCreatorId(),
                 'attribute' => 'creator_id'
             ],
-            //'responsible_id', ниже возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
+            //Task::getResponsibleId(), возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
             [
                 'label' => 'responsible_id (ответственный)',
-                'value' => function ($model) {
-                    return $model->responsible_id . ' (' .
-                        $user = Users::find()
-                                ->where(['id' => $model->responsible_id])
-                                ->one()
-                                ->login . ')';
-                },
+                'value' => Task::getResponsibleId(),
                 'attribute' => 'responsible_id'
             ],
             'deadline',
-//            'status_id', ниже возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
+//            Task::getStatusId(), возвращается значение и в скобках отображается пользователь (Users) из БД с таким же id
             [
                 'label' => 'status_id (статус)',
-                'value' => function ($model) {
-                    return $model->status_id . ' (' .
-                        $user = Users::find()
-                                ->where(['id' => $model->status_id])
-                                ->one()
-                                ->login . ')';
-                },
+                'value' => Task::getStatusId(),
                 'attribute' => 'status_id'
             ],
 
