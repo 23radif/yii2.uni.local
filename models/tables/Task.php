@@ -16,6 +16,7 @@ use Yii;
  * @property int $status_id
  *
  * @property Test $status
+ * @property Users $responsible
  */
 class Task extends \yii\db\ActiveRecord
 {
@@ -59,5 +60,42 @@ class Task extends \yii\db\ActiveRecord
     public function getStatus()
     {
         return $this->hasOne(Test::class, ['id' => 'status_id']);
+    }
+
+    public function getResponsible()
+    {
+        return $this->hasOne(Users::class, ['id' => 'responsible_id']);
+    }
+
+//id и логин создателя
+    public static function getCreatorId ()
+    {
+        return function ($model) {
+            return $model->creator_id . ' (' .
+                $user = Users::find()
+                        ->where(['id' => $model->creator_id])
+                        ->one()
+                        ->login . ')';
+        };
+    }
+
+//id и логин ответственного
+    public static function getResponsibleId ()
+    {
+        return function ($model) {
+            return $model->responsible_id . ' (' .
+                $user = Users::find()
+                        ->where(['id' => $model->responsible_id])
+                        ->one()
+                        ->login . ')';
+        };
+    }
+
+//id статуса
+    public static function getStatusId ()
+    {
+        return function ($model) {
+            return $model->status_id;
+        };
     }
 }

@@ -23,7 +23,7 @@ class DbController extends Controller
         ")->bindValue(':id', 2)
           ->execute();
 
-//        exit;
+        exit;
     }
 
 
@@ -39,9 +39,9 @@ class DbController extends Controller
 
         $model->save();*/
 
-        $model = Task::findOne(3);
+        /*$model = Task::findOne(3);
         $model->name = "Постичь непостижимое";
-        $model->save();
+        $model->save();*/
 
         /*$model = Task::findOne(['name' => 'Task 5']);*/
         /*$models = Task::findAll([1, 2, 3]);*/
