@@ -24,7 +24,7 @@ use \app\models\tables\Users;
 <!--    Выпадающий список пользователей-->
     <?= $form->field($model, 'responsible_id')->dropDownList($usersList); ?>
 
-    <?= $form->field($model, 'deadline')->textInput() ?>
+    <?= $form->field($model, 'deadline')->textInput(['type'=>'date']) ?>
 
     <?= $form->field($model, 'status_id')->textInput(['maxlength' => true]) ?>
 
