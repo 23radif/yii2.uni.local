@@ -1,0 +1,1 @@
+<?phpnamespace app\controllers;Class HtmlGet{    public $content;    static function html_get($filename)    {        ob_start();        include "HtmlGet.php";        return ob_get_clean();    }}

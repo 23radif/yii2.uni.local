@@ -2,7 +2,10 @@
 
 namespace app\models\tables;
 
+use app\models\TaskStatuses;
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "task".
@@ -59,7 +62,7 @@ class Task extends \yii\db\ActiveRecord
 
     public function getStatus()
     {
-        return $this->hasOne(Test::class, ['id' => 'status_id']);
+        return $this->hasOne(TaskStatuses::class, ['id' => 'status_id']);
     }
 
     public function getResponsible()
@@ -97,5 +100,17 @@ class Task extends \yii\db\ActiveRecord
         return function ($model) {
             return $model->status_id;
         };
+    }
+
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'create_time',
+                'updatedAtAttribute' => 'update_time',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
     }
 }
