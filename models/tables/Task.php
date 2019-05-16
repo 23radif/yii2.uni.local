@@ -2,7 +2,7 @@
 
 namespace app\models\tables;
 
-use app\models\TaskStatuses;
+use app\models\tables\TaskStatuses;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
@@ -98,7 +98,11 @@ class Task extends \yii\db\ActiveRecord
     public static function getStatusId ()
     {
         return function ($model) {
-            return $model->status_id;
+            return $model->status_id . ' (' .
+                $user = TaskStatuses::find()
+                        ->where(['id' => $model->status_id])
+                        ->one()
+                        ->name . ')';
         };
     }
 

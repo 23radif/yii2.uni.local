@@ -26,7 +26,7 @@ use \app\models\tables\Users;
 
     <?= $form->field($model, 'deadline')->textInput(['type'=>'date']) ?>
 
-    <?= $form->field($model, 'status_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status_id')->dropDownList($statusesList) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

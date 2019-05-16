@@ -1,5 +1,6 @@
 <?php
 
+use app\models\tables\TaskStatuses;
 use yii\helpers\Html;
 use app\models\tables\Users;
 use yii\widgets\ActiveForm;
@@ -18,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= $this->render('_form', [
         'model' => $model,
         'usersList' => $usersList,
+        'statusesList' => $statusesList,
     ]) ?>
 
 </div>

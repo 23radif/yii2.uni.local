@@ -27,8 +27,7 @@ class Bootstrap extends Component implements BootstrapInterface
             $user = $task->responsible;
 
             $body = "New task {$task->name}.
-            link: http://yii.uni.local?r=task/one&id={$task->id}
-            ";
+            link: http://yii2.uni.local/task/one?id={$task->id}";
 
             \Yii::$app->mailer->compose()
                 ->setTo($user->email)

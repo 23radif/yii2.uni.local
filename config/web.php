@@ -21,6 +21,13 @@ $config = [
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
+//            не работает:
+//            'class' => 'yii\redis\Cache',
+//            'redis' => [
+//                'hostname' => 'localhost',
+//                'port' => 6379,
+//                'database' => 'frutella',
+//                ],
         ],
         'user' => [
             'identityClass' => \app\models\UserIdentity::class,
