@@ -19,39 +19,53 @@ class TaskController extends Controller
 
     public function actionIndex()
     {
-        //$model = new Task();
+        //2. На главной странице сделать возможность фильтровать задачи по месяцам
+        $months = [
+            1 => 'Январь',
+            2 => 'Февраль',
+            3 => 'Март',
+            4 => 'Апрель',
+            5 => 'Май',
+            6 => 'Июнь',
+            7 => 'Июль',
+            8 => 'Август',
+            9 => 'Сентябрь',
+            10 => 'Октябрь',
+            11 => 'Ноябрь',
+            12 => 'Декабрь',
+        ];
+        $request = Yii::$app->request;
+        $month = $request->post('months') ?: 5;
 
-        //В комментариях нерабочий вариант кэширования:
-// //       $request = Yii::$app->request;
-//  //      $get = $request->get('sort');
-
-//        $cache = \Yii::$app->cache;
-//        $key = 'dataProviderTask'; //. $get
-//
-//        if(!$dataProvider = $cache->get($key)){
-////            $dependency = new DbDependency();
-////            $dependency ->sql = "SELECT * FROM task ORDER BY DESC";
-//           ....
-//            $cache->set($key, $dataProvider, 200, //$dependency);
-//        }
-
+//        "SELECT * FROM task WHERE MONTH(deadline) = {$month}";
 
         $dataProvider = new ActiveDataProvider([
-            'query' => Task::find(),
+            'query' => Task::find()
+            ->where("MONTH(deadline) = {$month}"),
             'pagination' => [
                 'pageSize' => 12
             ],
         ]);
 
+        //Настройки сортировки по умолчанию
         $dataProvider->sort->attributes['update_time'] = [
             'asc' => ['update_time' => SORT_ASC],
             'desc' => ['update_time' => SORT_DESC],
+            //Переименовываем:
             'label' => 'By update date',
         ];
+        //Сортировка по умолчанию:
         $dataProvider->sort->defaultOrder['update_time'] = SORT_ASC;
+
+        //3. На главной странице кэшировать рузультат выполнения запроса тасков(по месяцам)
+        \Yii::$app->db->cache(function() use ($dataProvider){
+            return $dataProvider->prepare();
+        });
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'months' => $months,
+            'month' => $month,
         ]);
     }
 
@@ -59,14 +73,21 @@ class TaskController extends Controller
     {
         $model = Task::findOne($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
-        }
-
         return $this->render('one', [
             'model' => $model,
             'usersList' => Users::getUsersList(),
             'statusesList' => TaskStatuses::getList()
         ]);
+    }
+
+    public function actionSave($id){
+        if ($model = Task::findOne($id)) {
+            $model->load(Yii::$app->request->post());
+            $model->save();
+            \Yii::$app->session->setFlash('success', "Изменения сохранены");
+        } else {
+            \Yii::$app->session->setFlash('error', "Не удалось сохранить изменения");
+        }
+        $this->redirect(\Yii::$app->request->referrer);
     }
 }

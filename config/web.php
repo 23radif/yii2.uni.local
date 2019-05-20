@@ -20,14 +20,14 @@ $config = [
             'cookieValidationKey' => 'o70eH_h6H29D73PeQSNLuFbtUQZ9TzWi',
         ],
         'cache' => [
-            'class' => 'yii\caching\FileCache',
-//            не работает:
-//            'class' => 'yii\redis\Cache',
-//            'redis' => [
-//                'hostname' => 'localhost',
-//                'port' => 6379,
-//                'database' => 'frutella',
-//                ],
+//            'class' => 'yii\caching\FileCache',
+            'class' => 'yii\redis\Cache',
+        ],
+        'redis' => [
+            'class' => 'yii\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
         ],
         'user' => [
             'identityClass' => \app\models\UserIdentity::class,
