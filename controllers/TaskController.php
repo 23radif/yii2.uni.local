@@ -20,20 +20,7 @@ class TaskController extends Controller
     public function actionIndex()
     {
         //2. На главной странице сделать возможность фильтровать задачи по месяцам
-        $months = [
-            1 => 'Январь',
-            2 => 'Февраль',
-            3 => 'Март',
-            4 => 'Апрель',
-            5 => 'Май',
-            6 => 'Июнь',
-            7 => 'Июль',
-            8 => 'Август',
-            9 => 'Сентябрь',
-            10 => 'Октябрь',
-            11 => 'Ноябрь',
-            12 => 'Декабрь',
-        ];
+        $months = \app\models\Task::getMonths();
         $request = Yii::$app->request;
         $month = $request->post('months') ?: 5;
 
