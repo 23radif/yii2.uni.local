@@ -20,6 +20,8 @@ use yii\db\Expression;
  *
  * @property Test $status
  * @property Users $responsible
+ * @property TaskComments[] $taskComments
+ * @property TaskAttachments[] $taskAttachments
  */
 class Task extends \yii\db\ActiveRecord
 {
@@ -51,12 +53,12 @@ class Task extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'description' => 'Description',
-            'creator_id' => 'Creator ID',
-            'responsible_id' => 'Responsible ID',
-            'deadline' => 'Deadline',
-            'status_id' => 'Status ID',
+            'name' => Yii::t("app", "task_name"),
+            'description' => Yii::t("app", "task_description"),
+            'creator_id' => Yii::t("app", "task_creator_id"),
+            'responsible_id' => Yii::t("app", "task_responsible_id"),
+            'deadline' =>  Yii::t("app", "task_deadline"),
+            'status_id' => Yii::t("app", "task_status_id"),
         ];
     }
 
@@ -104,6 +106,19 @@ class Task extends \yii\db\ActiveRecord
                         ->one()
                         ->name . ')';
         };
+    }
+
+    public function getTaskComments()
+    {
+        return $this->hasMany(TaskComments::class, ['task_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTaskAttachments()
+    {
+        return $this->hasMany(TaskAttachments::class, ['task_id' => 'id']);
     }
 
     public function behaviors()
