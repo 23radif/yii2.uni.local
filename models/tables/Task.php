@@ -121,6 +121,22 @@ class Task extends \yii\db\ActiveRecord
         return $this->hasMany(TaskAttachments::class, ['task_id' => 'id']);
     }
 
+    public static function deadlineSoon()
+    {
+        return self::find()
+            ->where('DATEDIFF(NOW(), task.deadline) < 1')
+            ->with('responsible')
+            ->all();
+    }
+
+    public static function deadlineSoonCount()
+    {
+        return self::find()
+            ->where('DATEDIFF(NOW(), task.deadline) < 1')
+            ->with('responsible')
+            ->count();
+    }
+
     public function behaviors()
     {
         return [

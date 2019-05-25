@@ -10,7 +10,7 @@ $config = [
     'bootstrap' => ['log', 'bootstrap'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
         '@img' => '@app/web/img/',
     ],
     'components' => [
@@ -68,11 +68,16 @@ $config = [
         ],
         'db' => $db,
 
-        //URL-менеджер, вместо site?r=controller/action... используется: site/controller/action...
+        //URL-менеджер, вместо site?r=controller/action/... используется: site/controller/action/id...
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            // 'enableStrictParsing' => true,
             'rules' => [
+                'tasks' => 'task/index',
+                'task/<id>' => 'task/one',
+//                'GET task/<id>' => 'task/one',
+//                'POST task/<id>' => 'task/two'
             ],
         ],
 

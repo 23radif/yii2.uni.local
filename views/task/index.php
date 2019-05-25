@@ -1,4 +1,8 @@
 <?php
+/** @var $dataProvider \app\commands\TaskController*/
+/** @var $month \app\commands\TaskController */
+/** @var $months \app\commands\TaskController */
+
 //Сортировка:
 use yii\helpers\Html;
 use yii\helpers\Url;

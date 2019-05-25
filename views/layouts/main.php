@@ -44,7 +44,8 @@ AppAsset::register($this);
                 ['label' => 'ru', 'url' => ['site/lang', 'lang' => 'ru']],
                 ['label' => 'en', 'url' => ['site/lang', 'lang' => 'en']]
             ]],
-            ['label' => 'Home', 'url' => ['/site/index.php']],
+//            ['label' => 'Home', 'url' => ['/site/index.php']],
+            ['label' => 'Home', 'url' => [\yii\helpers\Url::to(['/task'])]],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (

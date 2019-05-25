@@ -20,16 +20,17 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-            'cache' => [
-                'class' => PageCache::class,
-                'only' => ['about'],
-                'duration' => 60 * 60 * 24,
-//                'dependency' => [
-//                    'class' => DbDependency::class,
-//                    'sql' => '',
-//                ],
-//                'variations' => [Yii::$app->language],
-            ],
+//            Кэш для страницы site/about:
+//            'cache' => [
+//                'class' => PageCache::class,
+//                'only' => ['about'],
+//                'duration' => 60 * 60 * 24,
+////                'dependency' => [
+////                    'class' => DbDependency::class,
+////                    'sql' => '',
+////                ],
+////                'variations' => [Yii::$app->language],
+//            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
