@@ -20,7 +20,8 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
-//            Кэш для страницы site/about:
+//Кэш для страницы site/about, отключил так как из-за него при первом нажатии на ссылку home
+// открывается site/index.php, вместо task/index и соотвественно появляется ошибка 404:
 //            'cache' => [
 //                'class' => PageCache::class,
 //                'only' => ['about'],

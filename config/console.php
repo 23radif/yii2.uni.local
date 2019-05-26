@@ -14,6 +14,10 @@ $config = [
         '@tests' => '@app/tests',
     ],
     'components' => [
+//        Активировать роли RBAC, так же нужно сделать в консоли
+        'authManager' => [
+            'class' => \yii\rbac\DbManager::class,
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

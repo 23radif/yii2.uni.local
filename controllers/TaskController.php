@@ -12,6 +12,7 @@ use Yii;
 use yii\caching\DbDependency;
 use yii\data\ActiveDataProvider;
 use yii\data\Sort;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
@@ -20,22 +21,53 @@ class TaskController extends Controller
 {
     //public $layout = false;
 
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+//                Выбор только конкретных action, если не указывать, то для всех:
+//                'only' => ['one'],
+                'rules' => [
+                    [
+//                        Подтверждение конкретных action:
+//                        'actions' => ['one'],
+//                        true - разрешить доступ, false - запретить доступ:
+                        'allow' => true,
+//                        роли, '@' - для авторизованных пользователей, '?' - для неавторизованных пользователей, гостей:
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         //2. На главной странице сделать возможность фильтровать задачи по месяцам
         $months = \app\models\Task::getMonths();
         $request = Yii::$app->request;
-        $month = $request->post('months') ?: 5;
+        $month = $request->post('months') ?: 'all';
 
 //        "SELECT * FROM task WHERE MONTH(deadline) = {$month}";
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => Task::find()
-            ->where("MONTH(deadline) = {$month}"),
-            'pagination' => [
-                'pageSize' => 12
-            ],
-        ]);
+        if($month == 'all') {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Task::find(),
+                'pagination' => [
+                    'pageSize' => 12
+                ],
+            ]);
+        } else {
+            $dataProvider = new ActiveDataProvider([
+                'query' => Task::find()
+                    ->where("MONTH(deadline) = {$month}"),
+                'pagination' => [
+                    'pageSize' => 12,
+                ],
+            ]);
+        }
+
 
         //Настройки сортировки по умолчанию
         $dataProvider->sort->attributes['update_time'] = [
@@ -48,9 +80,9 @@ class TaskController extends Controller
         $dataProvider->sort->defaultOrder['update_time'] = SORT_ASC;
 
         //3. На главной странице кэшировать рузультат выполнения запроса тасков(по месяцам)
-        \Yii::$app->db->cache(function() use ($dataProvider){
-            return $dataProvider->prepare();
-        });
+//        \Yii::$app->db->cache(function() use ($dataProvider){
+//            return $dataProvider->prepare();
+//        });
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,

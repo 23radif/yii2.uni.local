@@ -41,6 +41,7 @@ class Task extends Model
 
     public static function getMonths(){
         return [
+            'all' => 'Все месяцы',
             1 => 'Январь',
             2 => 'Февраль',
             3 => 'Март',

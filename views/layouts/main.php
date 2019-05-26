@@ -22,7 +22,6 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="stylesheet" href="/css/task.css">
     <?php $this->head() ?>
 </head>
 <body>
@@ -45,7 +44,7 @@ AppAsset::register($this);
                 ['label' => 'en', 'url' => ['site/lang', 'lang' => 'en']]
             ]],
 //            ['label' => 'Home', 'url' => ['/site/index.php']],
-            ['label' => 'Home', 'url' => [\yii\helpers\Url::to(['/task'])]],
+            ['label' => 'Home', 'url' => [\yii\helpers\Url::to(['/task/index'])]],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (

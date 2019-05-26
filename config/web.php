@@ -14,6 +14,10 @@ $config = [
         '@img' => '@app/web/img/',
     ],
     'components' => [
+//        Активировать роли RBAC, так же нужно сделать в консоли
+        'authManager' => [
+            'class' => \yii\rbac\DbManager::class,
+        ],
         'i18n' => [
             'translations' => [
                 'app*' => [
@@ -74,9 +78,10 @@ $config = [
             'showScriptName' => false,
             // 'enableStrictParsing' => true,
             'rules' => [
+                'task/<page>/<per-page>' => 'task/index',
                 'tasks' => 'task/index',
-                'task/<id>' => 'task/one',
-//                'GET task/<id>' => 'task/one',
+//                'task/<id>' => 'task/one',
+                'GET task/<id>' => 'task/one',
 //                'POST task/<id>' => 'task/two'
             ],
         ],

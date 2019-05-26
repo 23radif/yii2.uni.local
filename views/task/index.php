@@ -4,9 +4,12 @@
 /** @var $months \app\commands\TaskController */
 
 //Сортировка:
+use app\assets\TaskAsset;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+
+TaskAsset::register($this);
 
 echo $dataProvider->sort->link('deadline') . ' / ';
 echo $dataProvider->sort->link('create_time') . ' / ';
