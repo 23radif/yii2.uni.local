@@ -25,7 +25,7 @@ class TaskController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
 //                Выбор только конкретных action, если не указывать, то для всех:
 //                'only' => ['one'],
                 'rules' => [

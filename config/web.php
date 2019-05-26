@@ -102,6 +102,7 @@ $config = [
         'class' => 'mdm\admin\classes\AccessControl',
         'allowActions' => [
             'site/*',
+            'task/*',
             'admin/*',
             'some-controller/some-action',
             // The actions listed here will be allowed to everyone including guests.
