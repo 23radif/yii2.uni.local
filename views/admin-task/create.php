@@ -7,6 +7,8 @@ use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\tables\Task */
+/* @var $usersList[] \app\controllers\AdminTaskController */
+/* @var $statusesList[] \app\controllers\AdminTaskController */
 
 $this->title = 'Create Task';
 $this->params['breadcrumbs'][] = ['label' => 'Tasks', 'url' => ['index']];

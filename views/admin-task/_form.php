@@ -8,6 +8,9 @@ use \app\models\tables\Users;
 /* @var $this yii\web\View */
 /* @var $model app\models\tables\Task */
 /* @var $form yii\widgets\ActiveForm */
+
+/* @var $usersList[] \app\controllers\AdminTaskController */
+/* @var $statusesList[] \app\controllers\AdminTaskController */
 ?>
 
 <div class="task-form">

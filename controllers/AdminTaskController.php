@@ -111,9 +111,11 @@ class AdminTaskController extends Controller
         }
 
         $usersList = Users::getUsersList();
+        $statusesList = TaskStatuses::getList();
         return $this->render('update', [
             'model' => $model,
             'usersList' => $usersList,
+            'statusesList' => $statusesList,
         ]);
     }
 

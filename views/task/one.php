@@ -61,8 +61,8 @@ use yii\helpers\Html;
             "action" => Url::to(['task/add-attachment']),
             'options' => ['class' => 'form-inline']
         ]); ?>
-        <?= $form->field($taskAttachmentForm, 'taskId')->hiddenInput(['value' => $model->id])->label(false); ?>
         <!-- скрытое поле-->
+        <?= $form->field($taskAttachmentForm, 'taskId')->hiddenInput(['value' => $model->id])->label(false); ?>
         <?= $form->field($taskAttachmentForm, 'attachment')->fileInput() ?>
         <?= \yii\helpers\Html::submitButton("Добавить", ['class' => 'btn btn-default']); ?>
         <?php ActiveForm::end() ?>

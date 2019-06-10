@@ -79,10 +79,10 @@ class TaskController extends Controller
         //Сортировка по умолчанию:
         $dataProvider->sort->defaultOrder['update_time'] = SORT_ASC;
 
-        //3. На главной странице кэшировать рузультат выполнения запроса тасков(по месяцам)
-//        \Yii::$app->db->cache(function() use ($dataProvider){
-//            return $dataProvider->prepare();
-//        });
+        //3. На главной странице кэшировать результат выполнения запроса тасков(по месяцам)
+        \Yii::$app->db->cache(function() use ($dataProvider){
+            return $dataProvider->prepare();
+        });
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,

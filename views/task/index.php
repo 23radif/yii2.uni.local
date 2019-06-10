@@ -39,6 +39,7 @@ echo $dataProvider->sort->link('update_time');
 //    'duration' => 5,
 //    //'variation' => $get,
 //])) {
+
 echo \yii\widgets\ListView::widget([
     'dataProvider' => $dataProvider,
     'itemView' => function ($model) {
