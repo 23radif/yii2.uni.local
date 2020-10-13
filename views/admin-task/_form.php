@@ -8,6 +8,9 @@ use \app\models\tables\Users;
 /* @var $this yii\web\View */
 /* @var $model app\models\tables\Task */
 /* @var $form yii\widgets\ActiveForm */
+
+/* @var $usersList[] \app\controllers\AdminTaskController */
+/* @var $statusesList[] \app\controllers\AdminTaskController */
 ?>
 
 <div class="task-form">
@@ -26,7 +29,7 @@ use \app\models\tables\Users;
 
     <?= $form->field($model, 'deadline')->textInput(['type'=>'date']) ?>
 
-    <?= $form->field($model, 'status_id')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'status_id')->dropDownList($statusesList) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

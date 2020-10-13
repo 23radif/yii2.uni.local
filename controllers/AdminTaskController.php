@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\tables\TaskStatuses;
 use app\models\tables\Users;
 use Yii;
 use app\models\tables\Task;
@@ -86,9 +87,11 @@ class AdminTaskController extends Controller
         }
 
         $usersList = Users::getUsersList();
+        $statusesList = TaskStatuses::getList();
         return $this->render('create', [
             'model' => $model,
             'usersList' => $usersList,
+            'statusesList' => $statusesList,
         ]);
     }
 
@@ -108,9 +111,11 @@ class AdminTaskController extends Controller
         }
 
         $usersList = Users::getUsersList();
+        $statusesList = TaskStatuses::getList();
         return $this->render('update', [
             'model' => $model,
             'usersList' => $usersList,
+            'statusesList' => $statusesList,
         ]);
     }
 

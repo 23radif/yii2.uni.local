@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use Yii;
+use yii\caching\DbDependency;
 use yii\filters\AccessControl;
+use yii\filters\PageCache;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -18,6 +20,18 @@ class SiteController extends Controller
     public function behaviors()
     {
         return [
+//Кэш для страницы site/about, отключил так как из-за него при первом нажатии на ссылку home
+// открывается site/index.php, вместо task/index и соотвественно появляется ошибка 404:
+//            'cache' => [
+//                'class' => PageCache::class,
+//                'only' => ['about'],
+//                'duration' => 60 * 60 * 24,
+////                'dependency' => [
+////                    'class' => DbDependency::class,
+////                    'sql' => '',
+////                ],
+////                'variations' => [Yii::$app->language],
+//            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'only' => ['logout'],
@@ -52,6 +66,12 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionLang($lang)
+    {
+        Yii::$app->session->set('lang', $lang);
+        $this->redirect(Yii::$app->request->referrer);
     }
 
     /**

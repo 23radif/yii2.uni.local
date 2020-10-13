@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\widgets\Alert;
@@ -21,7 +22,6 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link rel="stylesheet" href="/css/task.css">
     <?php $this->head() ?>
 </head>
 <body>
@@ -39,11 +39,16 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index.php']],
+            ['label' => 'Язык', 'items' => [
+                ['label' => 'ru', 'url' => ['site/lang', 'lang' => 'ru']],
+                ['label' => 'en', 'url' => ['site/lang', 'lang' => 'en']]
+            ]],
+//            ['label' => 'Home', 'url' => ['/site/index.php']],
+            ['label' => 'Home', 'url' => [\yii\helpers\Url::to(['/task/index'])]],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
